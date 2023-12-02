@@ -1,0 +1,22 @@
+{% layout 'layout' %}
+{% block content %}
+{%
+  render 'list',
+  pages: pages,
+  page: page,
+  total: total,
+  cachebuster: cachebuster,
+  title: title,
+  items: items,
+  imageURL: imageURL,
+  hasSearch: hasSearch,
+  hasPagination: hasPagination,
+%}
+{%
+  render 'list',
+  cachebuster: cachebuster,
+  title: "Top rated movies",
+  items: topRated,
+  imageURL: imageURL,
+%}
+{% endblock %}

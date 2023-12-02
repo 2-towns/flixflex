@@ -1,0 +1,40 @@
+{% layout 'layout' %}
+{% block content %}
+<div class="page-wrapper" id="page">
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <h2 class="page-title">{{ title }}</h2>
+          <div class="text-muted mt-1">
+            <p>{{ item.tagline }}</p>
+          </div>
+          <p>{{ item.overview }}</p>
+          {% if video %}
+            <div class="iframe">
+              <iframe src="{{video}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+          {% else %}
+            <p>The trailer is not available for this item.</p>
+          {% endif %}
+
+          <a
+            {% if type == 'movie' %}
+              href="/"
+            {% else %}
+              href="/series.html"
+            {% endif %}
+            class="btn"
+            >Back</a
+          >
+          {% if user != null %}
+            {% render 'bookmark.liquid', action: action, vals: vals %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer footer-transparent d-print-none"></footer>
+</div>
+
+{% endblock %}

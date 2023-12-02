@@ -1,0 +1,12 @@
+{% layout 'layout' %}
+{% block content %}
+<div class="page page-center">
+  <div class="container-tight py-4">
+    <div class="empty">
+      <div class="empty-header">{{ code }}</div>
+      <p class="empty-title">{{ error_title }}</p>
+      <p class="empty-subtitle text-secondary">{{ error_message }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

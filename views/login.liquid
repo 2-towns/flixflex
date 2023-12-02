@@ -1,0 +1,34 @@
+{% layout 'layout' %}
+{% block content %}
+<div class="page page-center">
+  <div class="container container-tight py-4">
+    <div class="card card-md">
+      <div class="card-body">
+        <h2 class="h2 text-center mb-4">Login or create your account</h2>
+        <form hx-post="/login.html" autocomplete="off" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" autocomplete="off" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label"> Password </label>
+            <div class="input-group input-group-flat">
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                autocomplete="off"
+                required
+              >
+            </div>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="btn btn-primary w-100">Sign in</button>
+          </div>
+        </form>
+        <div id="alert"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,96 @@
+<div class="page-wrapper" id="page">
+  <!-- Page header -->
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <h2 class="page-title">{{ title }}</h2>
+          {% if hasPagination %}
+            <div class="text-muted mt-1">
+              {{ page | minus: 1 | times: 10 | plus: 1 }}-{{ page | minus: 1 | times: 10 | plus: 10 }} of
+              {{ total }} movies
+            </div>
+          {% endif %}
+        </div>
+        {% if hasSearch %}
+          <div class="col-auto ms-auto d-print-none">
+            <div class="d-flex">
+              <div class="me-3">
+                <ul class="pagination ms-auto">
+                  <li class="page-item {% if page == 1 %} disabled  {% endif %} ">
+                    <a
+                      hx-get="/?page={{page | minus: 1 }}"
+                      hx-target="#page"
+                      hx-swap="outerHTML"
+                      hx-replace-url="true"
+                      class="page-link"
+                      href="#"
+                    >
+                      {% render 'icons/prev.liquid' %} prev
+                    </a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">{{ page }}</a>
+                  </li>
+                  <li class="page-item {% if page >= pages %} disabled  {% endif %}">
+                    <a
+                      hx-get="/?page={{page | plus: 1}}"
+                      hx-target="#page"
+                      hx-swap="outerHTML"
+                      hx-replace-url="true"
+                      class="page-link"
+                      href="#"
+                      >next {% render 'icons/next.liquid' %}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <!-- Page body -->
+  <div class="page-body" id="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        {% for item in items %}
+          <div class="col-sm-6 col-lg-4 movie">
+            <div class="card card-sm text-center">
+              <a href="#" class="d-block">
+                <img
+                  src="{{imageURL}}/t/p/w400/{{item.backdrop_path}}"
+                  class="card-img-top m-auto w-auto"
+                  height="200"
+                  width="356"
+              ></a>
+              <div class="card-body">
+                <div class="d-flex text-start">
+                  <div>
+                    <div>{{ item.title }}</div>
+                  </div>
+                  <div class="ms-auto">
+                    <div class="d-flex">
+                      {% render 'icons/star.liquid' %}
+                      <span class="ms-2">
+                        {{ item.vote_average }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="d-flex justify-content-between ">
+                  <a href="{{item.type}}/{{item.id}}/{{item.title | slug }}.html" class="btn btn-primary">Details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="d-flex"></div>
+    </div>
+  </div>
+  <footer class="footer footer-transparent d-print-none"></footer>
+</div>

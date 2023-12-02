@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <meta charset=" utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#FFF">
+    <meta name="description" content="{{description}}">
+    <meta
+      name="htmx-config"
+      content='{"allowEval": false, "includeIndicatorStyles": false}'
+    >
+    <meta name="robots" content="noindex">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <title>{{ title }}</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="48x48">
+    <link href="/css/tabler.min.css?{{cachebuster}}" rel="stylesheet">
+    <link href="/css/website.css?{{cachebuster}}" rel="stylesheet">
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+  </head>
+  <body>
+    <div class="page">
+      <!-- Navbar -->
+      <header class="navbar navbar-expand-md d-print-none">
+        <div class="container-xl">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbar-menu"
+            aria-controls="navbar-menu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <a href=".">
+              {% include 'icons/logo.liquid' %}
+            </a>
+          </h1>
+          <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item dropdown">
+              {% if user %}
+                <a href="#" hx-post="/logout.html" class="btn"> Logout </a>
+              {% else %}
+                <a href="/login.html" class="btn"> Login </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </header>
+      <header class="navbar-expand-md">
+        <div class="collapse navbar-collapse" id="navbar-menu">
+          <div class="navbar">
+            <div class="container-xl">
+              <div class="row flex-fill align-items-center">
+                <div class="col">
+                  <ul class="navbar-nav">
+                    <li class="nav-item {% if active == 1 %} active {% endif %}">
+                      <a class="nav-link" href="/">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          {% include 'icons/movie.liquid' %}
+                        </span>
+                        <span class="nav-link-title"> Movies </span>
+                      </a>
+                    </li>
+                    <li class="nav-item {% if active == 2 %} active {% endif %}">
+                      <a class="nav-link" href="/series.html">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          {% include 'icons/device-tv.liquid' %}
+                        </span>
+                        <span class="nav-link-title"> Series </span>
+                      </a>
+                    </li>
+
+                    <li class="nav-item {% if active == 3 %} active {% endif %}">
+                      <a class="nav-link" href="/favorites.html">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          {% include 'icons/bookmark.liquid' %}
+                        </span>
+                        <span class="nav-link-title"> Favorites </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-2 d-none d-xxl-block">
+                  <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+                    {% if hasSearch %}
+                      <div class="col-auto ms-auto d-print-none">
+                        <div class="d-flex">
+                          <div class="me-3">
+                            <div class="input-icon">
+                              <input
+                                type="search"
+                                value=""
+                                class="form-control"
+                                placeholder="Search…"
+                                name="query"
+                                hx-get="/{{type}}/search.html"
+                                hx-trigger="input changed delay:500ms, search"
+                                hx-target="#page"
+                                hx-swap="outerHTML"
+                              >
+                              <span class="input-icon-addon">
+                                {% render 'icons/search.liquid' %}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      {% block content -%}
+      {%- endblock %}
+    </div>
+  </body>
+  <script src="/js/tabler.min.js?{{cachebuster}}" defer></script>
+  <script src="/js/htmx-1.8.5.min.js" defer></script>
+</html>

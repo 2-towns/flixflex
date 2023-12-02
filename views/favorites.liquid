@@ -1,0 +1,10 @@
+{% layout 'layout' %}
+{% block content %}
+{%
+  render 'list',
+  cachebuster: cachebuster,
+  title: title,
+  items: items,
+  imageURL: imageURL,
+%}
+{% endblock %}

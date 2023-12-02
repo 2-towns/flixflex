@@ -1,0 +1,12 @@
+<a
+  hx-post="/favorites.html"
+  hx-vals='{{vals}}'
+  hx-swap="outerHTML"
+  class="btn btn-primary"
+>
+  {% if action == 'delete' %}
+    Remove from favorites
+  {% else %}
+    Add to favorite
+  {% endif %}
+</a>
